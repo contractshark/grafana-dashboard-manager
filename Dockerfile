@@ -12,7 +12,7 @@ ENV PATH=$PATH:$GOROOT/bin:$GOPATH/bin
 ADD . /go/src/github.com/netsage-project/grafana-dashboard-manager
 WORKDIR /go/src/github.com/netsage-project/grafana-dashboard-manager
 
-RUN make build-alpine
+RUN ls -lh; pwd; make build-alpine
 
 # Final Stage
 FROM golang:1.16.0 

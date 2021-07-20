@@ -6,6 +6,19 @@ before:
     - go mod tidy
     # you may remove this if you don't need go generate
     - go generate ./...
+dockers:
+  - image_templates: ["ghcr.io/netsage-project/gdg:{{ .Version }}-amd64"]
+    ids: [gdg]
+    dockerfile: Dockerfile
+      #use: buildx
+    build_flag_templates:
+      - --platform=linux/amd64
+      - --pull
+      - --label=org.opencontainers.image.created={{.Date}}
+      - --label=org.opencontainers.image.title={{.ProjectName}}
+      - --label=org.opencontainers.image.revision={{.FullCommit}}
+      - --label=org.opencontainers.image.version={{.Version}}
+
 builds:
   - env:
       - CGO_ENABLED=0
